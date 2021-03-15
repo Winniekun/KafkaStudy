@@ -92,9 +92,9 @@ public class AdminSample {
 
     public static void main(String[] args) throws Exception {
 //        createTopic();
-//        listTopics();
+        listTopics();
 //        delTopics();
 //        descTopics();
-        descTopics();
+//        descTopics();
     }
 }
