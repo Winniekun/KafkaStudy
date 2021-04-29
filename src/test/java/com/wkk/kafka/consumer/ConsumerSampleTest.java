@@ -31,7 +31,7 @@ public class ConsumerSampleTest {
     @Before
     public void genProperties() {
         props = new Properties();
-        props.setProperty("bootstrap.servers", "47.95.196.129:9092");
+        props.setProperty("bootstrap.servers", "47.95.224.162:9092");
         props.setProperty("group.id", "test");
         // 禁止自动提交
         props.setProperty("enable.auto.commit", "false");

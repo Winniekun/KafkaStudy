@@ -19,7 +19,7 @@ public class ProducerSample {
      */
     public static void producerSend() {
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "47.95.196.129:9092");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "47.95.224.162:9092");
         properties.put(ProducerConfig.ACKS_CONFIG, "all");
         properties.put(ProducerConfig.RETRIES_CONFIG, "0");
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, "16384");

@@ -29,7 +29,7 @@ public class AdminSample {
 
     public static AdminClient adminClient() {
         Properties props = new Properties();
-        props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "47.95.196.129:9092");
+        props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "47.95.224.162:9092");
         return AdminClient.create(props);
     }
 
