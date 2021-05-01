@@ -1,18 +1,11 @@
-# Kafka系统学习
-参考书籍：
-1. 深入理解Kafka核心设计与实践原理
-2. Kafka核心技术与实战
 ## Producer 
-
 Producer（生产者）顾名思义就是用于用于生产消息的主体，其主要步骤如下
-
 1. 配置客户端参数以及创建相应的生产者实例
 2. 构建待发送的消息
 3. 发送消息
 4. 关闭生产者实例
 
 ## 生产者的配置
-
 ```java
 public static Properties initConfig() {
     Properties props = new Properties();
@@ -24,7 +17,6 @@ public static Properties initConfig() {
     return props;
 }
 ```
-
 ## 消息的构造&发送
 
 创建生产者实例，并且消息构建好了之后，就可以发送消息了，对于消息的发送，主要有三种模式：
@@ -191,5 +183,31 @@ public static Properties initConfig() {
 
 ## 生产者整体架构
 
+![image-20210501232638092](https://i.loli.net/2021/05/01/CXGO2R5QftUAkLT.png)
+
 
 ## 一些重要的生产者配置
+
+1. acks
+
+   用于指定分区中必须有多少副本收到这条消息，之后生产者才认为消息是写入成功的，其涉及到消息的可靠传输和吞吐量之间的权衡
+
+   ```java
+   properties.put(ProducerConfig.ACKS_CONFIG, "1");
+   properties.put(ProducerConfig.ACKS_CONFIG, "0");
+   properties.put(ProducerConfig.ACKS_CONFIG, "all");
+   ```
+
+   * Ack = 1
+
+     折中方式
+
+   * Ack = 0
+
+     达到最大吞吐量，不过消息丢失无法处理
+
+   * ack = all
+
+     所有副本都成功写入消息，才能接收到服务端的成功响应。最强的可靠性，当然如果只有leader副本，则也就退化到了ack=1
+
+   

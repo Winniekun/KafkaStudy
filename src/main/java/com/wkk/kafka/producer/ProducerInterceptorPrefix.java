@@ -1,0 +1,45 @@
+package com.wkk.kafka.producer;
+
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.ProducerInterceptor;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
+
+import java.util.Map;
+
+/**
+ * 生产者拦截器
+ * @author weikunkun
+ * @since 2021/5/1
+ */
+@Slf4j
+public class ProducerInterceptorPrefix implements ProducerInterceptor<String, String> {
+    private volatile long sendSuccess = 0;
+    private volatile long sendFailure = 0;
+    @Override
+    public ProducerRecord<String, String> onSend(ProducerRecord<String, String> producerRecord) {
+        String modifyValue = "prefix1-" + producerRecord.value();
+        return new ProducerRecord<>(producerRecord.topic(), producerRecord.partition(),
+                producerRecord.timestamp(), producerRecord.key(), modifyValue, producerRecord.headers());
+    }
+
+    @Override
+    public void onAcknowledgement(RecordMetadata recordMetadata, Exception e) {
+        if (e == null) { // 消息正常
+            sendSuccess++;
+        } else {
+            sendFailure++;
+        }
+    }
+
+    @Override
+    public void close() {
+        double successRatio = (double) sendSuccess / (sendFailure + sendSuccess) * 100;
+        log.info("[INFO] msg send success rate: {}%", successRatio);
+    }
+
+    @Override
+    public void configure(Map<String, ?> map) {
+
+    }
+}
