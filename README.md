@@ -11,7 +11,7 @@ Producer（生产者）顾名思义就是用于用于生产消息的主体，其
 3. 发送消息
 4. 关闭生产者实例
 
-## 生产者的配置
+### 生产者的配置
 
 ```java
 public static Properties initConfig() {
@@ -25,7 +25,7 @@ public static Properties initConfig() {
 }
 ```
 
-## 消息的构造&发送
+### 消息的构造&发送
 
 创建生产者实例，并且消息构建好了之后，就可以发送消息了，对于消息的发送，主要有三种模式：
 
@@ -125,11 +125,11 @@ public static Properties initConfig() {
 
    
 
-## 消息的序列化
+### 消息的序列化
 
 可进行自定义序列化，实现Serializer\<T\>接口
 
-## 自定义分区
+### 自定义分区
 
 消息通过send()方法发送到broker中，期间可能会经过系列的过程，拦截器、序列化、分区器等一系列作用。
 
@@ -140,7 +140,7 @@ public static Properties initConfig() {
    1. 如果key不为null，使用MurmurHash2算法，根据最终的hash值来计算分区号
    2. 如果key为null，消息将会以轮询的方式发往主题内的各个可用分区
 
-## 生产者拦截
+### 生产者拦截
 
 拦截器的主要作用
 
@@ -189,7 +189,9 @@ public static Properties initConfig() {
 
    
 
-## 生产者整体架构
+### 生产者整体架构
+
+![image-20210502233250968](https://i.loli.net/2021/05/02/M8KGYOWVNzHkZ2u.png)
 
 
-## 一些重要的生产者配置
+### 一些重要的生产者配置
